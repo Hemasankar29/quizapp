@@ -1,0 +1,189 @@
+<html>
+
+<head>
+    <title>Javascript</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<script>
+   
+ var months=["May","April","June","July","August"];
+   for(var i=0; i<months.length;i++){
+   console.log(months[i])
+   }
+   
+  var fruits=["Apple","Mango","Guva","Banana","Jackfruit"];
+  fruits.push("Graphes");
+  console.log(fruits)
+ var films = ["Jurassic Park", "Titanic", "Toy Story"];
+
+films.push("The Revenant");
+
+console.log(films[3]); 
+</script><script>
+
+
+</script>
+ 
+ </head>
+ <body>
+ <div class="container">
+ <div class="row">
+ <div class="col-md-12 my-4">
+ <h4 class="text-center">Example</h4>
+    <p id="loop"></p>
+	<div class="table-design" id="table"></div>
+	 <h4 class="text-center">Table Filter</h4>
+<input id='tableinput' onkeyup='searchTable()' type='text' placeholder="Search..." class="form-control" style="cursor:pointer">
+<div class="table-style" id="myTable">
+<table class="table">
+<thead>
+ 
+</thead>
+   <tr>
+      <td>Raj</td>
+      <td>raj@gmail.com</td>
+	   <td>24</td>
+	    <td>Chennai</td>
+		 <td>Developer</td>
+		  <td>Tamilnadu</td>
+		   <td>India</td>
+   </tr>
+     <td>Pooja</td>
+      <td>pooja@gmail.com</td>
+	   <td>27</td>
+	    <td>Bangalore</td>
+		 <td>Officer</td>
+		  <td>Tamilnadu</td>
+		   <td>India</td>
+   </tr>
+    <td>Gokul</td>
+      <td>gokul@gmail.com</td>
+	   <td>27</td>
+	    <td>California</td>
+		 <td>Designer</td>
+		  <td>Sacramento</td>
+		   <td>America</td>
+   </tr>
+   
+       <td>Priya</td>
+      <td>priya@gmail.com</td>
+	   <td>25</td>
+	    <td>Chicago</td>
+		 <td>Ceo</td>
+		  <td>Chicago</td>
+		   <td>Illinois</td>
+   </tr>
+</table>
+</div>
+ <h4 class="text-center">Table Sortable</h4>
+<table class="sortable table" style="cursor:pointer">
+  <tr>
+    <th>Name</th>
+    <th>Address</th>
+    <th>Sales Person</th>
+  </tr>
+
+  <tr class="item">
+    <td>user:2911002</td>
+    <td>UK</td>
+    <td>Melissa</td>
+  </tr>
+  <tr class="item">
+    <td>user:2201002</td>
+    <td>France</td>
+    <td>Justin</td>
+  </tr>
+  <tr class="item">
+    <td>user:2901092</td>
+    <td>San Francisco</td>
+    <td>Judy</td>
+  </tr>
+  <tr class="item">
+    <td>user:2801002</td>
+    <td>Canada</td>
+    <td>Skipper</td>
+  </tr>
+  <tr class="item">
+    <td>user:2901009</td>
+    <td>Christchurch</td>
+    <td>Alex</td>
+  </tr>
+
+</table>
+  </div><!---Div close-->
+ </div>
+ </div>
+ </body>
+ <script>
+   var computerlanguage=["Java","Python","Html","Css","Bootstrap","Javascript","Angular"]
+   var listed="";
+   var i;
+   for(i=0;i<computerlanguage.length;i++){
+    listed+=computerlanguage[i]+"<br>";
+   
+   }
+   document.getElementById("loop").innerHTML = listed;
+   </script>
+   
+   <!--<script>
+    var tablerows = [{
+    name: "Raj",
+    age: 20,
+    email: "raj@gmail.com"
+}, {
+    name: "Pooja",
+    age: 22,
+    email: "pooja@gmail.com"
+}, {
+    name: "Rocky",
+    age: 25,
+    email: "rocky@gmail.com"
+}];
+   
+    var tablehtml = "<table class='table'>";
+	
+    for (var i = 0; i < tablerows.length; i++) {
+	   
+        tablehtml+="<tr>";
+        tablehtml+="<td>"+tablerows[i].name+"</td>";
+        tablehtml+="<td>"+tablerows[i].age+"</td>";
+        tablehtml+="<td>"+tablerows[i].email+"</td>";
+        
+        tablehtml+="</tr>";
+
+    }
+    tablehtml+="</table>";
+document.getElementById("table").innerHTML = tablehtml;
+
+
+</script>--->
+<script>
+function searchTable() {
+    var input, filter, found, table, tr, td, i, j;
+    input = document.getElementById("tableinput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 0; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) {
+            if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                found = true;
+            }
+        }
+        if (found) {
+            tr[i].style.display = "";
+            found = false;
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+</script>
+  
+ </html>

@@ -1,0 +1,265 @@
+<html>
+<head>
+    <title>Javascript</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	<style>
+	body {
+    background: #e4dacd70;
+	font-style: oblique;
+}
+	h4.text-center {
+    font-size: 25px;
+    font-weight: 700;
+}
+small#settimer {
+    font-size: 20px;
+    font-weight: 300;
+}
+.left-align {
+    background: #9e9e9e4f;
+    padding: 46px 16px;
+	border-radius: 10px;
+}
+input#next {
+    background: #2196f38c;
+    border: none;
+	border-radius: 5px;
+    margin-top: 25px;
+    padding: 2px 10px;
+	font-style: oblique;
+	}
+
+
+		
+	</style>
+	</head>
+	<body>
+	
+        <div class="container">
+		<div class="row">
+		<div class="col-md-12">
+		<div class="time my-5">
+		    <h4 class="text-center">Test -&nbsp;<small  id="timer"></small></h4>
+		</div>
+		</div>
+		</div>
+		
+		<div class="row">
+		<div class="col-md-12">
+		<div class="question-area">
+		
+			
+		</div>
+		<div class="left-align" id="page">
+			<div id="question"></div>
+			<input id="next" type="button" name="question" value="Start" onclick="nextQuestion();">
+		</div>
+	</div>
+		</div>
+		</div>
+		</div>
+	</body>
+	<script>
+	function Question(obj)
+		{
+			var objKey = Object.keys(obj);
+			if (objKey.length !== 3)
+			{
+				this.question = "Invalid question object passed";
+			}
+			else
+			{
+				this.question = obj[objKey[0]];
+				this.options	= obj[objKey[1]];	
+				this.answer = obj[objKey[2]];		
+			}
+		}
+
+	
+
+		Question.prototype.displayQuestion = function(){
+				var html = this.question;
+				 	html += "<br><br>";
+				 	this.options.forEach(function(val){
+				 		html += "<input type='radio' name='option' class='options' value='"+val+"'>"+val+"</input><br>";
+				 	});
+				 	//html += "</ul>";
+				return html;
+		}
+
+		Question.prototype.isCorrect	= function(reply){
+				return reply === this.answer;
+		}
+
+
+
+
+         var JSON = [{"question":"The improvement of computer hardware theory is summarized by which law.?","options":[" Metcalf's law"," Bill's Law","           Moore's First Law"," Grove's law"],"answer":" Moore's First Law"},
+					{"question":"The most widely used computer device is.","options":[" Solid state disks"," External hard disk"," Internal hard disk"," Mouse"],"answer":"Internal hard disk"},
+					{"question":"_______ are software which is used to do particular task.","options":[" Operating system"," Program"," Software","Data"],"answer":"Program"},
+					{"question":" Who is father of modern computers?","options":[" Abraham Lincoln"," James Gosling"," G ordon E. Moore"," Charles Babbage"],"answer":"Charles Babbage"},
+					{"question":"How many generations of computers we have?","options":[" 6"," 5"," 7"," 4"],"answer":"5"},
+					{"question":" ________ controls the way in which the computer system functions and provides a means by which users can interact with the computer.","options":[" The operating system"," The motherboard"," The platform"," Application software"],"answer":"The operating system"},
+					{"question":" The difference between people with access to computers and the Internet and those without this access is known as the:","options":[" digital divide."," Internet divide."," Web divide"," cyberway divide."],"answer":"digital divide"},
+					{"question":"All of the following are examples of real security and privacy risks EXCEPT:","options":[" Hackers"," Viruses"," spam"," Identity theft."],"answer":"spam"},
+					{"question":"The term 'Pentium' is related to","options":[" DVD"," Hard Disk"," Microprocessor"," Mouse"],"answer":"Microprocessor"},
+					{"question":"What does HTTP stands for?","options":[" Head Tail Transfer Protocol"," Hypertext Transfer Protocol"," Hypertext Transfer Plotter"," Hypertext Transfer Plot"],"answer":"Hypertext Transfer Protocol"}]
+					console.log(JSON[2])
+					
+
+		var counter = 1;		
+		var score = 0;			
+		var displayElement = document.getElementById("question"); 
+		var nextButton = document.getElementById("next");	
+		var timerr = document.getElementById("timer");		
+		var intTag = null;									
+
+		displayOnBrowserLoad();
+
+		setTimeout(showQuestion,0);	
+		setTimeout(startTimer,0);			
+
+
+
+
+
+		function displayOnBrowserLoad()
+		{
+			 displayElement.innerHTML = "Question will be displayed here"; 
+
+		}
+
+		function showQuestion()
+		{
+			var randInt = Math.floor(Math.random()*(JSON.length));	
+			var questObject = new Question(JSON[randInt]);			
+			displayElement.innerHTML = (counter)+". "+questObject.displayQuestion();
+										
+          if(counter<=9){
+            nextButton.value = "Next";   
+			}
+     else  {
+	 
+	 
+	 nextButton.value = "save";    
+console.log(JSON)}
+			window.questObject = questObject; 						
+																	
+		}
+
+
+	
+
+		function nextQuestion()
+		{	
+
+			if(nextButton.value == "Start Again")		
+			{
+				startTimer();
+			}	
+
+			var picked = "";
+			var input = document.getElementsByClassName("options");
+			for(var i=0;i<input.length;i++)
+			{
+				if(input[i].checked)
+				{
+					picked = input[i].value;
+				}
+			}
+			if(questObject.isCorrect(picked))
+			{
+				score += 1;		
+			}
+			counter +=1 ;		
+
+			showQuestion();
+
+			if(counter===11)
+			{
+				terminateQuiz();	
+			}
+		}
+
+		
+		function terminateQuiz()
+		{
+		
+				displayOnBrowserLoad();	
+				alert("Your score is "+score);
+				counter = 0;
+				score = 0;
+				nextButton.value = "Start Again";
+			 	clearInterval(intTag);
+			 	timerr.innerHTML = "--:--"
+		}
+
+
+		function startTimer()
+		{
+			var min = 0;
+			var sec = 60;
+			var m;
+			var s;
+			intTag = setInterval(function(){
+				sec -= 1;
+				if(sec==-1)
+				{
+					min -= 1;
+					sec = 60;
+				}
+				m = (min<10) ? ("0"+min):min;
+				s = (sec<10) ? ("0"+sec):sec;
+				timerr.innerHTML = m+":"+s;
+
+			},1000);
+		}
+
+		
+		setInterval(function(){
+			if(timerr.innerHTML == "00:00")
+
+			{
+				terminateQuiz();
+			}
+			
+		 
+		},1000);
+	
+		
+	</script>
+					<!---<script>
+	    var timeoutHandle;
+function countdown(minutes) {
+    var seconds = 60;
+    var mins = minutes;
+    function tick() {
+        var counter = document.getElementById("settimer");
+        var current_minutes = mins-1
+        seconds--;
+        counter.innerHTML =
+        current_minutes.toString() + ":" + (seconds < 10 ? "0" : "") + String(seconds);
+        if(current_minutes==0 && seconds==0) {
+       alert("Your time is Expired");
+        }
+		  else if(current_minutes!=0 && seconds==0) {
+       		countdown(current_minutes)
+        }
+		 else {
+            timeoutHandle=setTimeout(tick, 1000);
+        }
+		
+    }
+    tick();
+}
+
+countdown(2);
+
+
+	</script>-->
+	</html>
