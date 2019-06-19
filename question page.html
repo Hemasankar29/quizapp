@@ -25,11 +25,20 @@ small#settimer {
     padding: 46px 16px;
 	border-radius: 10px;
 }
-input#next {
+input.nextstyle {
     background: #2196f38c;
     border: none;
 	border-radius: 5px;
-    margin-top: 25px;
+    float:right;
+    padding: 2px 10px;
+	font-style: oblique;
+	margin-left:25px;
+	}
+input.prevstyle {
+    background: #2196f38c;
+    border: none;
+	border-radius: 5px;
+    float:right;
     padding: 2px 10px;
 	font-style: oblique;
 	}
@@ -57,7 +66,8 @@ input#next {
 		</div>
 		<div class="left-align" id="page">
 			<div id="question"></div>
-			<input id="next" type="button" name="question" value="Start" onclick="nextQuestion();">
+			<input id="next" class="nextstyle" type="button" name="question" value="Start" onclick="nextQuestion();">
+			<input id="previous" class="prevstyle" type="button" name="question" value="Start" onclick="previousQuestion();">
 		</div>
 	</div>
 		</div>
@@ -115,7 +125,8 @@ input#next {
 		var counter = 1;		
 		var score = 0;			
 		var displayElement = document.getElementById("question"); 
-		var nextButton = document.getElementById("next");	
+		var nextButton = document.getElementById("next");
+        var previousButton = document.getElementById("previous");		
 		var timerr = document.getElementById("timer");		
 		var intTag = null;									
 
@@ -142,6 +153,7 @@ input#next {
 										
           if(counter<=9){
             nextButton.value = "Next";   
+			previousButton.value = "previous";  
 			}
      else  {
 	 
@@ -185,13 +197,39 @@ console.log(JSON)}
 				terminateQuiz();	
 			}
 		}
+		function previousQuestion()
+		{	
+
+
+			var picked = "";
+			var input = document.getElementsByClassName("options");
+			for(var i=0;i<input.length;i++)
+			{
+				if(input[i].checked)
+				{
+					picked = input[i].value;
+				}
+			}
+			if(questObject.isCorrect(picked))
+			{
+				score += 1;		
+			}
+			counter -=1 ;		
+
+			showQuestion();
+
+			if(counter===11)
+			{
+				terminateQuiz();	
+			}
+		}
 
 		
 		function terminateQuiz()
 		{
 		
 				displayOnBrowserLoad();	
-				alert("Your score is "+score);
+				//alert("Your score is "+score);
 				counter = 0;
 				score = 0;
 				nextButton.value = "Start Again";
